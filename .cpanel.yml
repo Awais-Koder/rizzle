@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/mayahngv/rizzle.pk
+    - /bin/cp * $DEPLOYPATH

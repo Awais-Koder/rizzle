@@ -1,0 +1,489 @@
+models:
+  City:
+    name: string
+    relationships:
+      hasMany: Village
+  Village:
+    name: string
+    city_id: foreign
+  Pharmacy:
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: PharmacyBranch
+  PharmacyBranch:
+    city_id: foreign
+    pharmacy_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  Laboratory:
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: LaboratoryBranch
+  LaboratoryBranch:
+    laboratory_id: foreign
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  DoctorCategory:
+    name: string
+    relationships:
+      hasMany: Doctor
+  Doctor:
+    city_id: foreign
+    doctor_category_id: foreign
+    fees: integer
+    name: string
+    reviews: text
+    short_description: string
+    about_me: text
+    experience: text
+    schedule: text
+    address: string
+    whatsapp: string
+    phone: string
+    image: string
+    images: json nullable
+    latitude: integer
+    longitude: integer
+    video_youtube_link: string
+    ad_tag: boolean default false
+  FoodCategory:
+    name: string
+    relationships:
+      hasMany: Food
+  Food:
+    city_id: foreign
+    food_category_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    iamge: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: FoodBranch
+  FoodBranch:
+    food_id: foreign
+    city_id: foreign
+    category: string
+    name: string
+    phone_number: string
+    time: string
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: float
+    longitude: float
+    iamge: string
+    images: json nullable
+    ad_tag: boolean default false
+  Fitness:
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    images: json nullable
+    image: string
+    ad_tag: boolean default false
+    relationships:
+      hasMany: FitnessBranch
+  FitnessBranch:
+    fitness_id: foreign
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  Hospital:
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    facilities: string
+    doctor_profile: string
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: HospitalBranch
+  HospitalBranch:
+    hospital_id: foreign
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    facilities: string
+    doctor_profile: string
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  GovOffice:
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: GovOfficeBranch
+  GovOfficeBranch:
+    gov_office_id: foreign
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  EducationCategory:
+    name: string
+    relationships:
+      hasMany: Education
+  Education:
+    city_id: foreign
+    education_category_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: EducationBranch
+  EducationBranch:
+    city_id: foreign
+    education_category_id: foreign
+    education_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  Travel:
+    city_id: foreign
+    name: string
+    phone_number: string
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: TravelBranch
+  TravelBranch:
+    city_id: foreign
+    travel_id: foreign
+    name: string
+    phone_number: string
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  Farmer:
+    city_id: foreign
+    name: string
+    phone_number: string
+    start_time: datetime
+    end_time: datetime
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  Advertisement:
+    home_banner: json
+    sponsor_video: json
+    education_ad: json
+    travel_ad: json
+    food_ad: json
+    shop_ad: json
+  Shop:
+    city_id: foreign
+    name: string
+    image: string
+    product_name: string
+    old_price: integer
+    new_price: integer
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: ShopBranch
+  ShopBranch:
+    city_id: foreign
+    shop_id: foreign
+    name: string
+    image: string
+    product_name: string
+    old_price: integer
+    new_price: integer
+    images: json nullable
+    ad_tag: boolean default false
+  SubDepartment:
+    name: string
+    department_id: foreign
+  Department:
+    name: string
+    relationships:
+      hasMany: SubDepartment
+  Discount:
+    name: string
+    image: string
+  Gif:
+    name: string
+    image: string
+  User:
+    city_id: foreign
+    department_id: foreign
+    subdepartment_id: foreign nullable
+    name: string
+    age: integer
+    email: string nullable
+    gender: string
+    password: string
+    phone_number: string
+    type: string
+  Fashion:
+    city_id: foreign
+    name: string
+    type: string
+    phone_number: string
+    time: json
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: FashionBranch
+  FashionBranch:
+    city_id: foreign
+    fashion_id: foreign
+    name: string
+    type: string
+    phone_number: string
+    time: json
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  Electronic:
+    city_id: foreign
+    name: string
+    phone_number: string
+    time: json
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: ElectronicBranch
+  ElectronicBranch:
+    city_id: foreign
+    electronic_id: foreign
+    name: string
+    phone_number: string
+    time: json
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+  ShopProduct:
+    shop_id: foreign
+    old_price: integer
+    new_price: integer
+    images: json nullable
+controllers:
+  Advertisement:
+    resource: api.index
+  City:
+    resource: api.index , api.show
+  Doctor:
+    resource: api.index , api.show
+  DoctorCategory:
+    resource: api.index , api.show
+  Education:
+    resource: api.index , api.show
+  EducationBranch:
+    resource: api.index , api.show
+  EducationCategory:
+    resource: api.index , api.show
+  Farmer:
+    resource: api.index , api.show
+  Fitness:
+    resource: api.index , api.show
+  FitnessBranch:
+    resource: api.index , api.show
+  Food:
+    resource: api.index , api.show
+  FoodBranch:
+    resource: api.index , api.show
+  FoodCategory:
+    resource: api.index , api.show
+  GovOffice:
+    resource: api.index , api.show
+  GovOfficeBranch:
+    resource: api.index , api.show
+  Pharmacy:
+    resource: api.index , api.show
+  PharmacyBranch:
+    resource: api.index , api.show
+  Laboratory:
+    resource: api.index , api.show
+  LaboratoryBranch:
+    resource: api.index , api.show
+  Shop:
+    resource: api.index , api.show
+  ShopBranch:
+    resource: api.index , api.show
+  Travel:
+    resource: api.index , api.show
+  TravelBranch:
+    resource: api.index , api.show
+  Village:
+    resource: api.index , api.show
+  SubDepartment:
+    resource: api.index , api.show
+  Department:
+    resource: api.index , api.show
+  Discount:
+    resource: api.index
+  Gif:
+    resource: api.index
+  User:
+    resource: api.store
+  Fashion:
+      resource: api.index , api.show
+  FashionBranch:
+      resource: api.index , api.show
+  Electronic:
+      resource: api.index , api.show
+  ElectronicBranch:
+      resource: api.index , api.show
+  ShopProduct:
+      resource: api.index , api.show
+#
