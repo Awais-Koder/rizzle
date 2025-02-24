@@ -16,6 +16,7 @@ class SubDepartment extends Model
      * @var array
      */
     protected $guarded = [];
+    protected $table = 'sub_departments';
 
     /**
      * The attributes that should be cast to native types.

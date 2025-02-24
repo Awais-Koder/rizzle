@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 // 3|GCVrp2hwKuotqpF9FO2dRhBEsMcHvZjGJilpwnHlbc947b38
 
@@ -64,6 +65,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('shop-products', App\Http\Controllers\ShopProductController::class)->except('store', 'update', 'destroy');
 
+    Route::get('hospitals/{type?}', [App\Http\Controllers\HospitalController::class, 'index']);
+    Route::resource('hospitals', App\Http\Controllers\HospitalController::class)
+        ->except(['store', 'update', 'destroy']);
+
+
+    Route::apiResource('hospital-branches', App\Http\Controllers\HospitalBranchController::class)->except('store', 'update', 'destroy');
 });
-
-

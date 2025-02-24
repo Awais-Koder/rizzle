@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        City::factory(10)->create();
         Doctor::factory(10)->create();
         Food::factory(10)->create();
         Electronic::factory(10)->create();
@@ -73,7 +74,6 @@ class DatabaseSeeder extends Seeder
         Advertisement::factory(10)->create();
         Shop::factory(10)->create();
         ShopProduct::factory(10)->create();
-        City::factory(10)->create();
         Village::factory(10)->create();
         SubDepartment::factory(10)->create();
         Gif::factory(10)->create();

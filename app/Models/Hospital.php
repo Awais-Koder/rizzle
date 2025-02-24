@@ -12,7 +12,7 @@ class Hospital extends Model
     use HasFactory;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
      * @var array
      */
@@ -26,8 +26,8 @@ class Hospital extends Model
     protected $casts = [
         'id' => 'integer',
         'city_id' => 'integer',
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
+        'doctor_id' => 'integer',
+        'time' => 'array',
         'images' => 'array',
         'ad_tag' => 'boolean',
     ];
@@ -36,29 +36,14 @@ class Hospital extends Model
     {
         return $this->hasMany(HospitalBranch::class);
     }
-    public function doctor(): BelongsTo
-    {
-        return $this->belongsTo(Doctor::class);
-    }
 
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
     }
-    public static function booted()
+
+    public function doctor(): BelongsTo
     {
-        if (request()->is('admin/*')) {
-            return;
-        }
-        static::addGlobalScope('city', function ($query) {
-            // Check if `city_id` is passed in the request (e.g., header or query parameter)
-            $cityId = request()->header('City-Id')
-                ?? request()->query('city_id')
-                ?? (auth('sanctum')->check() ? auth('sanctum')->user()->city_id : null);
-            // Apply the `city_id` filter if available
-            if ($cityId) {
-                $query->where('city_id', $cityId);
-            }
-        });
+        return $this->belongsTo(Doctor::class);
     }
 }

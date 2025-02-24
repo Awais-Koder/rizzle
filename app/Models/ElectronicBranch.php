@@ -54,4 +54,18 @@ class ElectronicBranch extends Model
     {
         return $this->belongsTo(Electronic::class);
     }
+    public static function booted()
+    {
+        if (request()->is('admin/*')) {
+            return;
+        }
+        static::addGlobalScope('city', function ($query) {
+            $cityId = request()->header('City-Id');
+
+            // Apply the filter only if City-Id header is present
+            if (!empty($cityId)) {
+                $query->where('city_id', $cityId);
+            }
+        });
+    }
 }

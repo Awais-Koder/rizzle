@@ -24,23 +24,14 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('city_id')
-                    ->preload()
-                    ->optionsLimit(5)
-                    ->searchable()
                     ->native(true)
                     ->relationship('city', 'name')
                     ->required(),
                 Forms\Components\Select::make('department_id')
-                    ->preload()
-                    ->optionsLimit(5)
-                    ->searchable()
                     ->native(true)
                     ->relationship('department', 'name')
                     ->required(),
                 Forms\Components\Select::make('subdepartment_id')
-                    ->preload()
-                    ->optionsLimit(5)
-                    ->searchable()
                     ->native(true)
                     ->relationship('subdepartment', 'name'),
                 Forms\Components\TextInput::make('name')
@@ -60,12 +51,11 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone_number')
-                    ->tel()
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('type')
                     ->options([
-                        'governments' => 'Government',
+                        'government' => 'Government',
                         'private' => 'Private',
                     ])
                     ->required(),

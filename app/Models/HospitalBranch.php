@@ -11,7 +11,7 @@ class HospitalBranch extends Model
     use HasFactory;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
      * @var array
      */
@@ -26,8 +26,8 @@ class HospitalBranch extends Model
         'id' => 'integer',
         'hospital_id' => 'integer',
         'city_id' => 'integer',
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
+        'doctor_id' => 'integer',
+        'time' => 'array',
         'images' => 'array',
         'ad_tag' => 'boolean',
     ];
@@ -36,13 +36,15 @@ class HospitalBranch extends Model
     {
         return $this->belongsTo(Hospital::class);
     }
-    public function doctor(): BelongsTo
-    {
-        return $this->belongsTo(Doctor::class);
-    }
+
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function doctor(): BelongsTo
+    {
+        return $this->belongsTo(Doctor::class);
     }
     public static function booted()
     {
@@ -50,12 +52,10 @@ class HospitalBranch extends Model
             return;
         }
         static::addGlobalScope('city', function ($query) {
-            // Check if `city_id` is passed in the request (e.g., header or query parameter)
-            $cityId = request()->header('City-Id')
-                ?? request()->query('city_id')
-                ?? (auth('sanctum')->check() ? auth('sanctum')->user()->city_id : null);
-            // Apply the `city_id` filter if available
-            if ($cityId) {
+            $cityId = request()->header('City-Id');
+
+            // Apply the filter only if City-Id header is present
+            if (!empty($cityId)) {
                 $query->where('city_id', $cityId);
             }
         });

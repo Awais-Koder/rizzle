@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('hospitals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('city_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('doctor_id')->constrained('doctors')->cascadeOnDelete();
             $table->string('type');
             $table->string('name');
             $table->string('phone_number');
@@ -26,7 +27,6 @@ return new class extends Migration
             $table->integer('latitude');
             $table->integer('longitude');
             $table->text('facilities');
-            $table->foreignId('doctor_id')->constrained('doctors')->cascadeOnDelete();
             $table->string('image');
             $table->json('images')->nullable();
             $table->boolean('ad_tag')->default();

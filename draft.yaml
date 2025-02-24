@@ -1,4 +1,41 @@
 models:
-
+  Hospital:
+    city_id: foreign
+    doctor_id: foreign
+    type: string
+    name: string
+    phone_number: string
+    time: json
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    facilities: text
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
+    relationships:
+      hasMany: HospitalBranch
+  HospitalBranch:
+    hospital_id: foreign
+    city_id: foreign
+    doctor_id: foreign
+    type: string
+    name: string
+    phone_number: string
+    time: json
+    address: string
+    whatsapp_number: string
+    discount: integer
+    latitude: integer
+    longitude: integer
+    facilities: text
+    image: string
+    images: json nullable
+    ad_tag: boolean default false
 controllers:
-
+  Hospital:
+    resource: api.index , api.show
+  HospitalBranch:
+    resource: api.index , api.show

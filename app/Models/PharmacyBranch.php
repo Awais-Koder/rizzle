@@ -47,12 +47,10 @@ class PharmacyBranch extends Model
             return;
         }
         static::addGlobalScope('city', function ($query) {
-            // Check if `city_id` is passed in the request (e.g., header or query parameter)
-            $cityId = request()->header('City-Id')
-                ?? request()->query('city_id')
-                ?? (auth('sanctum')->check() ? auth('sanctum')->user()->city_id : null);
-            // Apply the `city_id` filter if available
-            if ($cityId) {
+            $cityId = request()->header('City-Id');
+
+            // Apply the filter only if City-Id header is present
+            if (!empty($cityId)) {
                 $query->where('city_id', $cityId);
             }
         });
