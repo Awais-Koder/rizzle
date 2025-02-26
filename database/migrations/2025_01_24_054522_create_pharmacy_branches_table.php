@@ -21,13 +21,14 @@ return new class extends Migration
             $table->string('phone_number');
             $table->json('time');
             $table->string('address');
-            $table->string('whatsapp_number');
-            $table->integer('discount');
+            $table->string('whatsapp_number')->nullable();
+            $table->integer('discount')->nullable();
             $table->integer('latitude');
             $table->integer('longitude');
             $table->string('image');
             $table->json('images')->nullable();
             $table->boolean('ad_tag')->default();
+            $table->string('discount_type')->nullable();
             $table->timestamps();
         });
 

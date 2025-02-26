@@ -46,7 +46,6 @@ class GovOfficeBranchResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('latitude')
                     ->required()

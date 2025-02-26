@@ -28,10 +28,8 @@ class ShopProductResource extends Resource
                     ->native(false)
                     ->required(),
                 Forms\Components\TextInput::make('old_price')
-                    ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('new_price')
-                    ->required()
                     ->numeric(),
                 Forms\Components\FileUpload::make('images')
                     ->multiple()

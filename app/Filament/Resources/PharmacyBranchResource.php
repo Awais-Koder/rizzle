@@ -47,11 +47,14 @@ class PharmacyBranchResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount')
-                    ->required()
                     ->numeric(),
+                    Forms\Components\Select::make('discount_type')
+                    ->options([
+                        'flat' => "Flat",
+                        'upto' => "Upto",
+                    ]),
                 Forms\Components\TextInput::make('latitude')
                     ->required()
                     ->numeric(),

@@ -15,21 +15,7 @@ class ElectronicBranch extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'city_id',
-        'electronic_id',
-        'name',
-        'phone_number',
-        'time',
-        'address',
-        'whatsapp_number',
-        'discount',
-        'latitude',
-        'longitude',
-        'image',
-        'images',
-        'ad_tag',
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be cast to native types.

@@ -21,7 +21,7 @@ class UserStoreRequest extends FormRequest
     {
         return [
             'city_id' => ['integer', 'exists:cities,id'],
-            'department_id' => ['required', 'integer', 'exists:departments,id'],
+            'department_id' => ['nullable', 'integer', 'exists:departments,id'],
             'subdepartment_id' => ['nullable', 'integer', 'exists:sub_departments,id'],
             'name' => ['required', 'string'],
             'age' => ['required', 'integer'],

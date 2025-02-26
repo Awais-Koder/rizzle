@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('phone_number');
             $table->json('time');
             $table->string('address');
-            $table->string('whatsapp_number');
-            $table->integer('discount');
+            $table->string('whatsapp_number')->nullable();
+            $table->integer('discount')->nullable();
+            $table->string('discount_type')->nullable();
             $table->integer('latitude');
             $table->integer('longitude');
             $table->string('image');

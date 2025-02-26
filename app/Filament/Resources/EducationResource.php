@@ -36,6 +36,14 @@ class EducationResource extends Resource
                     ])
                     ->native(false)
                     ->required(),
+                Forms\Components\Select::make('edu_type')
+                    ->options([
+                        'school' => 'School',
+                        'univeristy' => 'Univeristy',
+                        'college' => 'College',
+                    ])
+                    ->native(false)
+                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -60,11 +68,14 @@ class EducationResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount')
-                    ->required()
                     ->numeric(),
+                Forms\Components\Select::make('discount_type')
+                    ->options([
+                        'flat' => "Flat",
+                        'upto' => "Upto",
+                    ]),
                 Forms\Components\TextInput::make('latitude')
                     ->required()
                     ->numeric(),
@@ -72,11 +83,11 @@ class EducationResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\FileUpload::make('image')
-                ->label('Icon')
+                    ->label('Icon')
                     ->image()
                     ->required(),
                 Forms\Components\FileUpload::make('images')
-                ->label('Menu Images')
+                    ->label('Menu Images')
                     ->multiple()
                     ->uploadingMessage('Uploading attachment...')
                     ->imageEditor()
@@ -106,6 +117,8 @@ class EducationResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('edu_type')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),

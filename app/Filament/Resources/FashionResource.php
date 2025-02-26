@@ -47,11 +47,14 @@ class FashionResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount')
-                    ->required()
                     ->numeric(),
+                Forms\Components\Select::make('discount_type')
+                    ->options([
+                        'flat' => "Flat",
+                        'upto' => "Upto",
+                    ]),
                 Forms\Components\TextInput::make('latitude')
                     ->required()
                     ->numeric(),
@@ -98,7 +101,7 @@ class FashionResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone_number')
                     ->searchable(),
-                    Tables\Columns\TextColumn::make('time')
+                Tables\Columns\TextColumn::make('time')
                     ->formatStateUsing(function ($record) {
                         if (!empty($record->time)) {
                             return implode(', ', json_decode($record->time, true)); // Convert array to comma-separated string

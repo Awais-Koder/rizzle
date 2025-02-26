@@ -43,33 +43,56 @@ class FoodBranchResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                    Forms\Components\Select::make('type')
+                    ->options([
+                        'Regular' => 'Regular',
+                        'Deal' => 'Deal',
+                    ])
+                    ->reactive()
+                    ->native(false)
+                    ->required(),
+                    Forms\Components\FileUpload::make('deal_image')
+                    ->label('Deal Image')
+                    ->image()
+                    ->imageEditor()
+                    ->required(fn($get) => $get('type') == "Deal")
+                    ->hidden(fn($get) => $get('type') == 'Regular'),
                 Forms\Components\TextInput::make('phone_number')
-                    ->tel()
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('time')
-                    ->required()
-                    ->maxLength(255),
+                time_field(),
                 Forms\Components\TextInput::make('address')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
-                    ->required()
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount')
-                    ->required()
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->numeric(),
+                    Forms\Components\Select::make('discount_type')
+                    ->hidden(fn($get) => $get('type') == 'Deal')
+                    ->options([
+                        'flat' => "Flat",
+                        'upto' => "Upto",
+                    ]),
                 Forms\Components\TextInput::make('latitude')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('longitude')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('iamge')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->label('Icon')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('images')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->label('Menu Images')
                     ->multiple()
                     ->uploadingMessage('Uploading attachment...')

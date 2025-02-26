@@ -16,16 +16,17 @@ return new class extends Migration
         Schema::create('fitnesses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('city_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->string('phone_number');
-            $table->json('time');
-            $table->string('address');
-            $table->string('whatsapp_number');
-            $table->integer('discount');
-            $table->integer('latitude');
-            $table->integer('longitude');
+            $table->string('name')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->json('time')->nullable();
+            $table->string('address')->nullable();
+            $table->string('whatsapp_number')->nullable();
+            $table->integer('discount')->nullable();
+            $table->string('discount_type')->nullable();
+            $table->integer('latitude')->nullable();
+            $table->integer('longitude')->nullable();
             $table->json('images')->nullable();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->boolean('ad_tag')->default();
             $table->timestamps();
         });

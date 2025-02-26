@@ -18,16 +18,17 @@ return new class extends Migration
             $table->foreignId('food_id')->constrained()->cascadeOnDelete();
             $table->foreignId('city_id')->constrained()->cascadeOnDelete();
             $table->foreignId('food_category_id')->constrained()->cascadeOnDelete();
-            $table->string('type'); // regular / deal
-            $table->string('name');
-            $table->string('phone_number');
-            $table->json('time');
-            $table->string('address');
-            $table->string('whatsapp_number');
-            $table->integer('discount');
-            $table->float('latitude');
-            $table->float('longitude');
-            $table->string('iamge');
+            $table->string('type')->nullable(); // regular / deal
+            $table->string('name')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->json('time')->nullable();
+            $table->string('address')->nullable();
+            $table->string('whatsapp_number')->nullable();
+            $table->integer('discount')->nullable();
+            $table->string('discount_type')->nullable();
+            $table->float('latitude')->nullable();
+            $table->float('longitude')->nullable();
+            $table->string('iamge')->nullable();
             $table->json('images')->nullable();
             $table->boolean('ad_tag')->default(false);
             $table->timestamps();

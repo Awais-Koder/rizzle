@@ -11,7 +11,9 @@ class EditFood extends EditRecord
     protected static string $resource = FoodResource::class;
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        $data['images'] = json_encode($data['images']);
+        if(!empty($data['images'])){
+            $data['images'] = json_encode($data['images']);
+        }
         // dd($data);
         return $data;
     }

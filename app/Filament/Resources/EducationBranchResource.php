@@ -37,6 +37,14 @@ class EducationBranchResource extends Resource
                     ])
                     ->native(false)
                     ->required(),
+                    Forms\Components\Select::make('edu_type')
+                    ->options([
+                        'school' => 'School',
+                        'univeristy' => 'Univeristy',
+                        'college' => 'College',
+                    ])
+                    ->native(false)
+                    ->required(),
                 Forms\Components\Select::make('education_id')
                     ->relationship('education', 'name')
                     ->native(false)
@@ -52,11 +60,14 @@ class EducationBranchResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount')
-                    ->required()
                     ->numeric(),
+                Forms\Components\Select::make('discount_type')
+                    ->options([
+                        'flat' => "Flat",
+                        'upto' => "Upto",
+                    ]),
                 Forms\Components\TextInput::make('latitude')
                     ->required()
                     ->numeric(),
@@ -64,9 +75,11 @@ class EducationBranchResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\FileUpload::make('image')
+                    ->label('Icon')
                     ->image()
                     ->required(),
                 Forms\Components\FileUpload::make('images')
+                    ->label('Menu Images')
                     ->multiple()
                     ->uploadingMessage('Uploading attachment...')
                     ->imageEditor()
@@ -96,6 +109,8 @@ class EducationBranchResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
+                    ->sortable(),
+                    Tables\Columns\TextColumn::make('edu_type')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('education.name')
                     ->numeric()

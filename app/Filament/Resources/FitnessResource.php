@@ -55,11 +55,14 @@ class FitnessResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount')
-                    ->required()
                     ->numeric(),
+                    Forms\Components\Select::make('discount_type')
+                    ->options([
+                        'flat' => "Flat",
+                        'upto' => "Upto",
+                    ]),
                 Forms\Components\TextInput::make('latitude')
                     ->required()
                     ->numeric(),
@@ -67,6 +70,7 @@ class FitnessResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\FileUpload::make('images')
+                    ->label('Menu Images')
                     ->multiple()
                     ->uploadingMessage('Uploading attachment...')
                     ->imageEditor()
@@ -85,6 +89,7 @@ class FitnessResource extends Resource
                             return json_decode($record->images, true); // Decode and show the images
                     }),
                 Forms\Components\FileUpload::make('image')
+                    ->label('Icon')
                     ->image()
                     ->required(),
                 Forms\Components\Toggle::make('ad_tag'),

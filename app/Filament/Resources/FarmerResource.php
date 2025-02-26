@@ -30,22 +30,21 @@ class FarmerResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone_number')
-                    ->tel()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\DateTimePicker::make('start_time')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('end_time')
-                    ->required(),
+                    time_field(),
                 Forms\Components\TextInput::make('address')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
-                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount')
-                    ->required()
                     ->numeric(),
+                    Forms\Components\Select::make('discount_type')
+                    ->options([
+                        'flat' => "Flat",
+                        'upto' => "Upto",
+                    ]),
                 Forms\Components\TextInput::make('latitude')
                     ->required()
                     ->numeric(),
@@ -53,9 +52,11 @@ class FarmerResource extends Resource
                     ->required()
                     ->numeric(),
                 Forms\Components\FileUpload::make('image')
+                ->label('Icon')
                     ->image()
                     ->required(),
                     Forms\Components\FileUpload::make('images')
+                    ->label('Banner Images')
                     ->multiple()
                     ->uploadingMessage('Uploading attachment...')
                     ->imageEditor()
@@ -88,12 +89,13 @@ class FarmerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone_number')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('start_time')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('end_time')
-                    ->dateTime()
-                    ->sortable(),
+                    Tables\Columns\TextColumn::make('time')
+                    ->formatStateUsing(function ($record) {
+                        if (!empty($record->time)) {
+                            return implode(', ', json_decode($record->time, true)); // Convert array to comma-separated string
+                        }
+                        return '-'; // Default placeholder if no data
+                    }),
                 Tables\Columns\TextColumn::make('address')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('whatsapp_number')
