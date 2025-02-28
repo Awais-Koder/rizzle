@@ -27,6 +27,7 @@ class ShopProductResource extends Resource
                     ->relationship('shop', 'name')
                     ->native(false)
                     ->required(),
+                Forms\Components\TextInput::make('name'),
                 Forms\Components\TextInput::make('old_price')
                     ->numeric(),
                 Forms\Components\TextInput::make('new_price')
@@ -59,6 +60,8 @@ class ShopProductResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('shop.name')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('old_price')
                     ->numeric()

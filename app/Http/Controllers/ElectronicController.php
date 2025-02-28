@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class ElectronicController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null)
     {
-        $electronics = Electronic::all();
+        $query = Electronic::query();
+        if ($type) {
+            // Normalize input to match database values (if necessary)
+            $type = strtolower($type) === 'regular' ? 'regular' : 'deal';
+            $query->where('type', $type);
+        }
+        $electronics = $query->get();
 
         return new ElectronicCollection($electronics);
     }

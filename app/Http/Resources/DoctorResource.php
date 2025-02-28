@@ -27,7 +27,6 @@ class DoctorResource extends JsonResource
             'whatsapp' => $this->whatsapp,
             'phone' => $this->phone,
             'image' => $this->image,
-            'images' => $this->images,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'video_youtube_link' => $this->video_youtube_link,

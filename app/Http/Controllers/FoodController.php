@@ -9,10 +9,15 @@ use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null)
     {
-        $food = Food::all();
-
+        $query = Food::query();
+        if ($type) {
+            // Normalize input to match database values (if necessary)
+            $type = strtolower($type) === 'regular' ? 'regular' : 'deal';
+            $query->where('type', $type);
+        }
+        $food = $query->get();
         return new FoodCollection($food);
     }
 

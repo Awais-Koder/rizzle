@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class EducationBranchController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null , $eduType = null)
     {
-        $educationBranches = EducationBranch::all();
+        $query = EducationBranch::query();
+        if($type){
+            $query->where('type' , $type);
+        }
+        if($eduType){
+            $query->where('edu_type' , $eduType);
+        }
+        $educationBranches = $query->get();
 
         return new EducationBranchCollection($educationBranches);
     }

@@ -58,4 +58,21 @@ class UserController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
+
+    public function applyForCard($id)
+    {
+        $reqExist = User::where('id', $id)->where('card_status', 'applied')->exists();
+        if ($reqExist) {
+            return response()->json([
+                'message' => 'Card application already exists.',
+            ]);
+        }
+        $user = User::findOrFail($id);
+        $user->card_status = 'applied';
+        $user->save();
+
+        return response()->json([
+            'message' => 'Card application successful.',
+        ]);
+    }
 }

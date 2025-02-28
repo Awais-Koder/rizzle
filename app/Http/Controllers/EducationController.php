@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 
 class EducationController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null , $eduType = null)
     {
-        $education = Education::all();
+        $query = Education::query();
+        if($type){
+            $query->where('type' , $type);
+        }
+        if($eduType){
+            $query->where('edu_type' , $eduType);
+        }
+        $education = $query->get();
 
         return new EducationCollection($education);
     }

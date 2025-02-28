@@ -22,6 +22,7 @@ class FashionResource extends JsonResource
             'address' => $this->address,
             'whatsapp_number' => $this->whatsapp_number,
             'discount' => $this->discount,
+            'discount_type' => $this->discount_type,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'image' => $this->image,

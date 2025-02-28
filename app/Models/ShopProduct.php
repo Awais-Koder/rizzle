@@ -15,12 +15,7 @@ class ShopProduct extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'shop_id',
-        'old_price',
-        'new_price',
-        'images',
-    ];
+    protected $guarded = [];
 
     public function shop(): BelongsTo
     {

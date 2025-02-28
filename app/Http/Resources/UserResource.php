@@ -19,10 +19,12 @@ class UserResource extends JsonResource
             'subdepartment_id' => $this->subdepartment_id,
             'name' => $this->name,
             'age' => $this->age,
-            'email' => $this->email,
             'gender' => $this->gender,
             'phone_number' => $this->phone_number,
             'type' => $this->type,
+            'land' => $this->land,
+            'animals' => $this->animals,
+            'card_status' => $this->card_status,
         ];
     }
 }

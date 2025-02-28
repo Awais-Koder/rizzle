@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class HospitalBranchController extends Controller
 {
-    public function index(Request $request): HospitalBranchCollection
+    public function index($type = null): HospitalBranchCollection
     {
-        $hospitalBranches = HospitalBranch::all();
+        $query = HospitalBranch::query();
+        if ($type) {
+            // Normalize input to match database values (if necessary)
+            $type = strtolower($type) === 'clinic' ? 'Clinic' : 'Hospital';
+            $query->where('type', $type);
+        }
+        $hospitalBranches = $query->get();
 
         return new HospitalBranchCollection($hospitalBranches);
     }

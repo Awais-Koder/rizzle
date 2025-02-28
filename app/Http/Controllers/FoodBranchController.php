@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class FoodBranchController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null)
     {
-        $foodBranches = FoodBranch::all();
+        $query = FoodBranch::query();
+        if ($type) {
+            // Normalize input to match database values (if necessary)
+            $type = strtolower($type) === 'regular' ? 'regular' : 'deal';
+            $query->where('type', $type);
+        }
+        $foodBranches = $query->get();
 
         return new FoodBranchCollection($foodBranches);
     }
