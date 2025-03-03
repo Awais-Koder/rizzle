@@ -52,8 +52,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('discounts', App\Http\Controllers\DiscountController::class)->only('index');
     Route::apiResource('gifs', App\Http\Controllers\GifController::class)->only('index');
 
+    Route::get('fashions/{type?}', [App\Http\Controllers\FashionController::class, 'index']);
     Route::apiResource('fashions', App\Http\Controllers\FashionController::class)->except('store', 'update', 'destroy');
-
+    Route::get('fashion-branches/{type?}', [App\Http\Controllers\FashionBranchController::class, 'index']);
     Route::apiResource('fashion-branches', App\Http\Controllers\FashionBranchController::class)->except('store', 'update', 'destroy');
     Route::get('electronics/{type?}', [App\Http\Controllers\ElectronicController::class, 'index']);
     Route::apiResource('electronics', App\Http\Controllers\ElectronicController::class)->except('store', 'update', 'destroy');

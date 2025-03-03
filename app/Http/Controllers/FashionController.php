@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class FashionController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null)
     {
-        $fashions = Fashion::all();
+        $query = Fashion::query();
+        if ($type) {
+            // Normalize input to match database values (if necessary)
+            $type = strtolower($type) === 'cloth' ? 'cloth' : 'shoes';
+            $query->where('type', $type);
+        }
+        $fashions = $query->get();
 
         return new FashionCollection($fashions);
     }

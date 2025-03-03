@@ -25,11 +25,14 @@ class UserStoreRequest extends FormRequest
             'subdepartment_id' => ['nullable', 'integer', 'exists:sub_departments,id'],
             'name' => ['required', 'string'],
             'age' => ['required', 'integer'],
-            'email' => ['nullable', 'email'],
+            'email' => ['nullable', 'email' , 'unique:users'],
             'gender' => ['required', 'string'],
             'password' => ['required' , 'min:8' , 'confirmed'],
             'phone_number' => ['required', 'string' , 'unique:users'],
             'type' => ['required', 'string'],
+            'land' => ['nullable', 'string'],
+            'animals' => ['nullable', 'string'],
+            'card_status' => ['nullable', 'string'],
         ];
     }
 }

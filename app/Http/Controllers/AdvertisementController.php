@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AdvertisementController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         $advertisements = Advertisement::all();
 

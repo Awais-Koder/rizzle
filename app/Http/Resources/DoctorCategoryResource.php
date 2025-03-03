@@ -15,6 +15,7 @@ class DoctorCategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'image' => $this->image,
             'doctors' => DoctorCollection::make($this->whenLoaded('doctors')),
         ];
     }

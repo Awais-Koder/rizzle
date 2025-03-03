@@ -9,10 +9,15 @@ use Illuminate\Http\Request;
 
 class FashionBranchController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null)
     {
-        $fashionBranches = FashionBranch::all();
-
+        $query = FashionBranch::query();
+        if ($type) {
+            // Normalize input to match database values (if necessary)
+            $type = strtolower($type) === 'cloth' ? 'cloth' : 'shoes';
+            $query->where('type', $type);
+        }
+        $fashionBranches = $query->get();
         return new FashionBranchCollection($fashionBranches);
     }
 
