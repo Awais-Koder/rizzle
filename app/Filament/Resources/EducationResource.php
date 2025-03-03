@@ -41,6 +41,9 @@ class EducationResource extends Resource
                         'school' => 'School',
                         'univeristy' => 'Univeristy',
                         'college' => 'College',
+                        'academies' => 'Academies',
+                        'technical_college' => 'Technical College',
+                        'vocational_institute' => 'Vocational Institute',
                     ])
                     ->native(false)
                     ->required(),
