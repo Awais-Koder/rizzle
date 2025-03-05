@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 // 3|GCVrp2hwKuotqpF9FO2dRhBEsMcHvZjGJilpwnHlbc947b38
 
+Route::apiResource('departments', App\Http\Controllers\DepartmentController::class)->except('store', 'update', 'destroy');
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -43,12 +45,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('shops', App\Http\Controllers\ShopController::class)->except('store', 'update', 'destroy');
 
+    Route::get('travel/{type?}', [App\Http\Controllers\TravelController::class, 'index']);
     Route::apiResource('travel', App\Http\Controllers\TravelController::class)->except('store', 'update', 'destroy');
+    Route::get('travel-branches/{type?}', [App\Http\Controllers\TravelBranchController::class, 'index']);
+    Route::apiResource('travel-branches', App\Http\Controllers\TravelBranchController::class)->except('store', 'update', 'destroy');
     Route::get('food/{type?}', [App\Http\Controllers\FoodController::class, 'index']);
     Route::apiResource('food', App\Http\Controllers\FoodController::class)->except('store', 'update', 'destroy');
     Route::get('food-branches/{type?}', [App\Http\Controllers\FoodBranchController::class, 'index']);
     Route::apiResource('food-branches', App\Http\Controllers\FoodBranchController::class)->except('store', 'update', 'destroy');
-    Route::apiResource('departments', App\Http\Controllers\DepartmentController::class)->except('store', 'update', 'destroy');
     Route::apiResource('discounts', App\Http\Controllers\DiscountController::class)->only('index');
     Route::apiResource('gifs', App\Http\Controllers\GifController::class)->only('index');
 

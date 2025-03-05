@@ -9,9 +9,13 @@ use Illuminate\Http\Request;
 
 class TravelController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null)
     {
-        $travel = Travel::all();
+        $query = Travel::query();
+        if($type){
+            $query->where('travel_type' , $type);
+        }
+        $travel = $query->get();
 
         return new TravelCollection($travel);
     }

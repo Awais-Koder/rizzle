@@ -26,6 +26,7 @@ class TravelResource extends JsonResource
             'image' => $this->image,
             'images' => $this->images,
             'ad_tag' => $this->ad_tag,
+            'travel_type' => $this->travel_type,
             'travelBranches' => TravelBranchCollection::make($this->whenLoaded('travelBranches')),
         ];
     }

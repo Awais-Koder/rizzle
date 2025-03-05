@@ -33,6 +33,15 @@ class TravelResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
+                    Forms\Components\Select::make('travel_type')
+                    ->options([
+                        'travel_agency' => 'Travel Agency',
+                        'hotel' => 'Hotel',
+                        'bus_service' => 'Bus Service',
+                        'rent_a_car' => 'Rent A Car',
+                    ])
+                    ->native(false)
+                    ->required(),
                 Forms\Components\TextInput::make('phone_number')
                     ->required()
                     ->maxLength(255),

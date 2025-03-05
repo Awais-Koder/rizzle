@@ -9,9 +9,13 @@ use Illuminate\Http\Request;
 
 class TravelBranchController extends Controller
 {
-    public function index(Request $request)
+    public function index($type = null)
     {
-        $travelBranches = TravelBranch::all();
+        $query = TravelBranch::query();
+        if($type){
+            $query->where('travel_type' , $type);
+        }
+        $travelBranches = $query->get();
 
         return new TravelBranchCollection($travelBranches);
     }
