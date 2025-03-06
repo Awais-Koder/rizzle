@@ -1,20 +1,13 @@
 created:
-    - app/Http/Controllers/HospitalController.php
-    - app/Http/Controllers/HospitalBranchController.php
-    - database/factories/HospitalFactory.php
-    - database/factories/HospitalBranchFactory.php
-    - database/migrations/2025_02_18_073901_create_hospitals_table.php
-    - database/migrations/2025_02_18_073902_create_hospital_branches_table.php
-    - app/Models/Hospital.php
-    - app/Models/HospitalBranch.php
-    - tests/Feature/Http/Controllers/HospitalControllerTest.php
-    - tests/Feature/Http/Controllers/HospitalBranchControllerTest.php
-    - app/Http/Resources/HospitalCollection.php
-    - app/Http/Resources/HospitalResource.php
-    - app/Http/Resources/HospitalBranchCollection.php
-    - app/Http/Resources/HospitalBranchResource.php
+    - app/Http/Controllers/SocialLinkController.php
+    - database/factories/SocialLinkFactory.php
+    - database/migrations/2025_03_05_040339_create_social_links_table.php
+    - app/Models/SocialLink.php
+    - tests/Feature/Http/Controllers/SocialLinkControllerTest.php
+    - app/Http/Resources/SocialLinkCollection.php
 updated:
     - routes/api.php
 models:
     Hospital: { city_id: foreign, doctor_id: foreign, type: string, name: string, phone_number: string, time: json, address: string, whatsapp_number: string, discount: integer, latitude: integer, longitude: integer, facilities: text, image: string, images: 'json nullable', ad_tag: 'boolean default false', relationships: { hasMany: HospitalBranch } }
     HospitalBranch: { hospital_id: foreign, city_id: foreign, doctor_id: foreign, type: string, name: string, phone_number: string, time: json, address: string, whatsapp_number: string, discount: integer, latitude: integer, longitude: integer, facilities: text, image: string, images: 'json nullable', ad_tag: 'boolean default false' }
+    SocialLink: { youtube_link: string, facebook_link: string, insta_link: string, tiktok_link: string }

@@ -74,3 +74,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('hospital-branches/{type?}', [App\Http\Controllers\HospitalBranchController::class, 'index']);
     Route::apiResource('hospital-branches', App\Http\Controllers\HospitalBranchController::class)->except('store', 'update', 'destroy');
 });
+
+
+Route::apiResource('social-links', App\Http\Controllers\SocialLinkController::class)->only('index');
