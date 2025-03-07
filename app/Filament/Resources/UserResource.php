@@ -12,6 +12,9 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Notifications\Notification;
+use App\Services\CardGenerateService;
+use Filament\Tables\Filters\SelectFilter;
 
 class UserResource extends Resource
 {
@@ -25,12 +28,10 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\Select::make('city_id')
                     ->native(true)
-                    ->relationship('city', 'name')
-                    ->required(),
+                    ->relationship('city', 'name'),
                 Forms\Components\Select::make('department_id')
                     ->native(true)
-                    ->relationship('department', 'name')
-                    ->required(),
+                    ->relationship('department', 'name'),
                 Forms\Components\Select::make('subdepartment_id')
                     ->native(true)
                     ->relationship('subdepartment', 'name'),
@@ -55,10 +56,9 @@ class UserResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('type')
                     ->options([
-                        'government' => 'Government',
-                        'private' => 'Private',
-                    ])
-                    ->required(),
+                        'user' => 'User',
+                        'farmer' => 'Farmer',
+                    ]),
             ]);
     }
 
@@ -66,15 +66,6 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('city.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('department.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('subdepartment.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('age')
@@ -86,6 +77,21 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),
+                    Tables\Columns\TextColumn::make('city.name')
+                    ->numeric()
+                    ->default('Null')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('department.name')
+                    ->numeric()
+                    ->default('Null')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('subdepartment.name')
+                    ->numeric()
+                    ->default('Null')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('card_status')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -96,10 +102,31 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('card_status')
+                    ->options([
+                        'applied' => 'Applied',
+                        'not_applied' => 'Not Applied',
+                        'approved' => 'Approved',
+                    ])
+                    ->query(function (Builder $query, $data) {
+                        if (!empty($data['value'])) {
+                            $query->where('card_status', $data['value']);
+                        }
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Generate Card')
+                ->icon('heroicon-o-credit-card')
+                ->color('green')
+                ->action(function (User $user , CardGenerateService $CardGenerateService) {
+                    $CardGenerateService->generateCard($user);
+                    return Notification::make()
+                        ->title('Success')
+                        ->body('Card generated for ' . $user->name)
+                        ->success()
+                        ->send();
+                })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

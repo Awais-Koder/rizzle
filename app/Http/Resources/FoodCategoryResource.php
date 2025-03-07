@@ -15,6 +15,7 @@ class FoodCategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'image' => $this->image,
             'food' => FoodCollection::make($this->whenLoaded('food')),
         ];
     }

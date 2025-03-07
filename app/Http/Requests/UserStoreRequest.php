@@ -25,6 +25,7 @@ class UserStoreRequest extends FormRequest
             'subdepartment_id' => ['nullable', 'integer', 'exists:sub_departments,id'],
             'name' => ['required', 'string'],
             'age' => ['required', 'integer'],
+            'address' => ['nullable', 'integer'],
             'email' => ['nullable', 'email' , 'unique:users'],
             'gender' => ['required', 'string'],
             'password' => ['required' , 'min:8' , 'confirmed'],
