@@ -34,31 +34,39 @@ class FashionResource extends Resource
                     ->maxLength(255),
                 Forms\Components\Select::make('type')
                     ->options([
-                        "Cloth" => "Cloth",
-                        "Shoes" => "Shoes",
+                        'Regular' => 'Regular',
+                        'Deal' => 'Deal',
                     ])
+                    ->reactive()
                     ->native(false)
                     ->required(),
                 Forms\Components\TextInput::make('phone_number')
                     ->required()
+                    ->hidden(fn($get) => $get('type') == 'Deal')
                     ->maxLength(255),
                 time_field(),
                 Forms\Components\TextInput::make('address')
                     ->required()
+                    ->hidden(fn($get) => $get('type') == 'Deal')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('whatsapp_number')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('discount')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->numeric(),
                 Forms\Components\Select::make('discount_type')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->options([
                         'flat' => "Flat",
                         'upto' => "Upto",
                     ]),
                 Forms\Components\TextInput::make('latitude')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('longitude')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->required()
                     ->numeric(),
                 Forms\Components\FileUpload::make('image')
@@ -66,6 +74,7 @@ class FashionResource extends Resource
                     ->image()
                     ->required(),
                 Forms\Components\FileUpload::make('images')
+                ->hidden(fn($get) => $get('type') == 'Deal')
                     ->label('Menu Images')
                     ->multiple()
                     ->uploadingMessage('Uploading attachment...')

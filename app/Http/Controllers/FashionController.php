@@ -14,7 +14,7 @@ class FashionController extends Controller
         $query = Fashion::query();
         if ($type) {
             // Normalize input to match database values (if necessary)
-            $type = strtolower($type) === 'cloth' ? 'cloth' : 'shoes';
+            $type = strtolower($type) === 'regular' ? 'regular' : 'deal';
             $query->where('type', $type);
         }
         $fashions = $query->get();
