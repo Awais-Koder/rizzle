@@ -14,8 +14,9 @@ class CardGenerateService
 {
     public static function generateCard($data)
     {
+        $cardExpiryDate = Carbon::now()->addYear();
         $userName = $data->name;
-        $number = 1234567890123456; // Dummy card number
+        $number = $data->card_number; // Dummy card number
         $templatePath = public_path('card/f.png');
         $image = imagecreatefrompng($templatePath);
         $fontSize = 70; // Font size
@@ -97,7 +98,7 @@ class CardGenerateService
         // Create zip archive
         $zip = new ZipArchive;
         $zipFilePath = public_path('temp/cardImages.zip');
-        $data->card_status = 'approved';
+        $data->expiry_date = $cardExpiryDate;
         $data->save();
         if ($zip->open($zipFilePath, ZipArchive::CREATE) === TRUE) {
             $zip->addFile($frontImagePath, 'frontImage.png');

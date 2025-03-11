@@ -24,6 +24,9 @@ class UserController extends Controller
         for ($i = 0; $i < 4; $i++) {
             $cardNumber .= str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
         }
+        if(User::where('card_number', $cardNumber)->exists()) {
+            return $this->generateSecureCardNumber();
+        }
         return $cardNumber;
     }
 
