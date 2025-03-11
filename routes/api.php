@@ -15,7 +15,7 @@ Route::apiResource('cities', App\Http\Controllers\CityController::class)->except
 Route::post('login', [UserController::class, 'login']);
 Route::apiResource('users', App\Http\Controllers\UserController::class)->only('store');
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('apply-for-card/{id}' , [UserController::class , 'applyForCard']);
+    Route::get('apply-for-card/{id}/{name?}' , [UserController::class , 'applyForCard']);
     Route::get('education/{type?}/{edutype?}', [App\Http\Controllers\EducationController::class, 'index']);
     Route::apiResource('education', App\Http\Controllers\EducationController::class)->except('store', 'update', 'destroy');
     Route::get('education-branches/{type?}/{edutype?}', [App\Http\Controllers\EducationBranchController::class, 'index']);

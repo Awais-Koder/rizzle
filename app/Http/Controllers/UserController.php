@@ -19,6 +19,14 @@ class UserController extends Controller
         return new UserCollection($users);
     }
 
+    function generateSecureCardNumber() {
+        $cardNumber = '';
+        for ($i = 0; $i < 4; $i++) {
+            $cardNumber .= str_pad(random_int(0, 9999), 4, '0', STR_PAD_LEFT);
+        }
+        return $cardNumber;
+    }
+
     public function store(UserStoreRequest $request)
     {
         $data = $request->validated();
@@ -59,7 +67,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function applyForCard($id)
+    public function applyForCard($id , Request $request)
     {
         $reqExist = User::where('id', $id)->where('card_status', 'applied')->exists();
         if ($reqExist) {
@@ -69,6 +77,8 @@ class UserController extends Controller
         }
         $user = User::findOrFail($id);
         $user->card_status = 'applied';
+        $user->card_name = $request->card_name;
+        $user->card_number = $this->generateSecureCardNumber();
         $user->save();
 
         return response()->json([
